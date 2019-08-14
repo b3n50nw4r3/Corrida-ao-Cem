@@ -1,25 +1,56 @@
 <!DOCTYPE HTML>
+<html lang="pt-br">
 
-<html>]
-    <head>
-        <title>Corrida ao Cem</title>
-        <meta charset=UTF-8>
+<head>
 
-    </head>
+	<!-- Metadados do website -->
+	<title>Corrida ao Cem</title>
+	<meta name="description" content="Esse site lhe ajudará a ganhar todas as partidas de Corrida ao Cem">
+	<meta name="author" content="Doodles e Benson">
+	<!-- Website responsivo, necessário para bom funcionamento no celular -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset=UTF-8>
 
-    <body>
+	<!-- Biblioteca de visual e estilo Bootstrap -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-        <h1> Esse site lhe ajudará a ganhar todas as partidas de Corrida ao Cem</h1>
-        <br>
-        <p>Clique para poder inserir o número de movimentos máximo da partida</p>
-        <button id="movimentos">clique!</button>
-        <br>
-        <h2>Primeira casa na qual você tem que parar</h2> <h2 id=""></h2>
+</head>
 
-        <script>
-        
-        </script>
-        
+<body class="container">
 
-    </body>
+	<!-- Divisão para o conteúdo, fundo bonitinho -->
+	<div class="jumbotron" style="margin-top: 3em">
+
+		<!-- Título -->
+		<h1 class="display-4 text-center">Esse site lhe ajudará a ganhar todas as partidas de Corrida ao Cem</h1>
+
+		<!-- Linha divisória -->
+		<hr class="my-4">
+
+		<!-- Input do número máximo de movimentos da partida -->
+		<p class="lead">Insira o número de movimentos máximo da partida.</p>
+		<input type="text" class="form-control" id="movimentos_max" value="5" onKeyUp="atualizarMovimentosMax()" maxlength="3" placeholder="0"/>
+
+		<!-- Linha divisória -->
+		<hr class="my-4">
+
+		<!-- Resultado do cálculo -->
+		<h4>Primeira casa na qual você tem que parar:</h4>
+		<h6 id="">nº da casa</h6>
+
+	</div>
+
+	<!-- Código vai aqui -->
+	<script type="text/javascript">
+		let movimentosMax;
+
+		function atualizarMovimentosMax() {
+			movimentosMax = document.getElementById("movimentos_max").value;
+			console.log("Movimentos máximos: " + movimentosMax)
+		}
+	</script>
+
+</body>
+
 </html>
