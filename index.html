@@ -30,7 +30,8 @@
 
 		<!-- Input do número máximo de movimentos da partida -->
 		<p class="lead">Insira o número de movimentos máximo da partida.</p>
-		<input type="text" class="form-control" id="movimentos_max" value="5" onKeyUp="atualizarMovimentosMax()" maxlength="3" placeholder="0"/>
+		<!--                      id para usar no JS | nº padrão | limitar tamanho por 2 digitos e atualizar variavel automaticamente-->
+		<input class="form-control" id="movimentos_max" value="5" oninput="checarTamanhoInput(2); atualizarMovimentosMax()" maxLength="2" min="0" max="99" type="number" placeholder="0"/>
 
 		<!-- Linha divisória -->
 		<hr class="my-4">
@@ -43,10 +44,20 @@
 
 	<!-- Código vai aqui -->
 	<script type="text/javascript">
+		//Input do usuário
+		let movimentoxMaxInput = document.getElementById("movimentos_max");
+		//Valor final usado no código
 		let movimentosMax;
 
+		//Limitar tamanho do input para 2 dígitos (99) para que não seja possível bugar o programa
+		function checarTamanhoInput(maxLength) {
+			if (movimentoxMaxInput.value.length > maxLength) movimentoxMaxInput.value = movimentoxMaxInput.value.slice(0, maxLength);
+		}
+
+		//Definir o valor da váriavel movimentosMax como o input do usuário
 		function atualizarMovimentosMax() {
-			movimentosMax = document.getElementById("movimentos_max").value;
+			//movimentoxMax = número digitado (já limitado a 99 pela função checarTamanhoInput)
+			movimentosMax = movimentoxMaxInput.value;
 			console.log("Movimentos máximos: " + movimentosMax)
 		}
 	</script>
