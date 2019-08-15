@@ -34,8 +34,6 @@
 		<!-- id para usar no JS | limitar tamanho por 2 digitos e atualizar variavel automaticamente -->
 		<input class="form-control" id="movimentos_max" oninput="checarTamanhoInput(2); atualizarMovimentosMax()" maxLength="2" min="0" max="99" type="number" placeholder="5"/>
 
-		
-
 		<!-- alerta para deixar o oponente jogar antes -->
 		<div id="alert" style="display:none" class="alert alert-danger mt-4" role="alert">DEIXE O SEU OPONETE JOGAR PRIMEIRO!!!</div>
 
@@ -113,16 +111,18 @@
             }
             console.log("lista atual: " + listaDeCasas);
             document.getElementById("cada").innerText = listaDeCasas;
+			gerarTabela(listaDeCasas);
 		}
 
-		gerarTabela();
-		function gerarTabela() {
+		function gerarTabela(listaDeCasas) {
 			let tabela = document.getElementById("tabela-do-jogo");
 			cedula = 1;
+			tabela.innerHTML = '';
 			for(i = 0; i < 4; i++) {
 				let linha = tabela.insertRow();
 				for(y = 0; y < 25; y++) {
 					let cell = linha.insertCell();
+					if(listaDeCasas.includes(cedula)) cell.classList.add("bg-success");
 					let text = document.createTextNode(cedula++);
 					cell.appendChild(text);
 				}
