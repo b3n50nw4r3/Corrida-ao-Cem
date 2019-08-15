@@ -31,26 +31,30 @@
 		<!-- Input do número máximo de movimentos da partida -->
 		<p class="lead">Insira o número de movimentos máximo da partida.</p>
 		<!--                      id para usar no JS | nº padrão | limitar tamanho por 2 digitos e atualizar variavel automaticamente-->
-		<input class="form-control" id="movimentos_max" value="5" oninput="checarTamanhoInput(2); atualizarMovimentosMax()" maxLength="2" min="0" max="99" type="number" placeholder="0"/>
+		<input class="form-control" id="movimentos_max" oninput="checarTamanhoInput(2); atualizarMovimentosMax()" maxLength="2" min="0" max="99" type="number" placeholder="5"/>
 
 		<!-- Linha divisória -->
 		<hr class="my-4">
 
 		<!-- Resultado do cálculo -->
 		<h4>Primeira casa na qual você tem que parar:</h4>
-		<h6 id="primeira">nº da casa</h6>
+        <h6 id="primeira">nº da casa</h6>
+        
+        <!-- Resultado do cálculo -->
+		<h4>Primeira casa na qual você tem que parar:</h4>
+		<h6 id="cada">nº da casa</h6>
 
 	</div>
 
 	<!-- Código vai aqui -->
     <script type="text/javascript">
-    
-        let primeiraCasa = ducument.getElementById("primeira")
 
 		//Input do usuário
 		let movimentoxMaxInput = document.getElementById("movimentos_max");
 		//Valor final usado no código
-		let movimentosMax;
+		let movimentosMax = 5;
+
+        definirPrimeiraCasa();
 
 		//Limitar tamanho do input para 2 dígitos (99) para que não seja possível bugar o programa
 		function checarTamanhoInput(maxLength) {
@@ -66,9 +70,12 @@
 		}
 
         function definirPrimeiraCasa (){
-            primeiraCasa = 100 % (movimentosMax + 1);
-            alert(primeiraCasa);
+            let definirPrimeiraCasa = 100 % (parseInt(movimentosMax) + 1);
+            console.log(definirPrimeiraCasa);
+            document.getElementById("primeira").innerText = definirPrimeiraCasa;
         }
+
+
 
 	</script>
 
