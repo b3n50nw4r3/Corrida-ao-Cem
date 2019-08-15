@@ -30,15 +30,21 @@
 
 		<!-- Input do número máximo de movimentos da partida -->
 		<p class="lead">Insira o número de movimentos máximo da partida.</p>
-		                      <!-- id para usar no JS | limitar tamanho por 2 digitos e atualizar variavel automaticamente-->
+							  
+		<!-- id para usar no JS | limitar tamanho por 2 digitos e atualizar variavel automaticamente -->
 		<input class="form-control" id="movimentos_max" oninput="checarTamanhoInput(2); atualizarMovimentosMax()" maxLength="2" min="0" max="99" type="number" placeholder="5"/>
+
+		
+
+		<!-- alerta para deixar o oponente jogar antes -->
+		<div id="alert" style="display:none" class="alert alert-danger mt-4" role="alert">DEIXE O SEU OPONETE JOGAR PRIMEIRO!!!</div>
 
 		<!-- Linha divisória -->
 		<hr class="my-4">
 
 		<!-- Resultado do cálculo -->
 		<h4>Primeira casa na qual você tem que parar:</h4>
-        <h6 id="primeira">nº da casa</h6>
+		<h6 id="primeira">nº da casa</h6>
         
         <!-- Resultado do cálculo -->
 		<h4>Cada casa na qual você tem que parar:</h4>
@@ -78,23 +84,14 @@
 		//Cálculo do primeiro movimento do jogo
         function definirPrimeiraCasa() {
             let definirPrimeiraCasa = 100 % (parseInt(movimentosMax) + 1);
-            console.log("primeira casa: " + definirPrimeiraCasa);
-            document.getElementById("primeira").innerText = definirPrimeiraCasa;
-        }
-
-		gerarTabela();
-		function gerarTabela() {
-			let tabela = document.getElementById("tabela-do-jogo");
-			cedula = 1;
-			for(i = 0; i < 4; i++) {
-				let linha = tabela.insertRow();
-				for(y = 0; y < 25; y++) {
-					let cell = linha.insertCell();
-					let text = document.createTextNode(cedula++);
-					cell.appendChild(text);
-				}
+			console.log("primeira casa: " + definirPrimeiraCasa);
+			document.getElementById("primeira").innerText = definirPrimeiraCasa;
+			if (definirPrimeiraCasa == 0) {
+				document.getElementById("alert").style.display = "block"; 
+			} else {
+				document.getElementById("alert").style.display = "none"; 
 			}
-		}
+        }
 
 		//Cálculo de todas as casas esperadas para o jogo
         function definirCadaCasa() {
@@ -116,6 +113,20 @@
             }
             console.log("lista atual: " + listaDeCasas);
             document.getElementById("cada").innerText = listaDeCasas;
+		}
+
+		gerarTabela();
+		function gerarTabela() {
+			let tabela = document.getElementById("tabela-do-jogo");
+			cedula = 1;
+			for(i = 0; i < 4; i++) {
+				let linha = tabela.insertRow();
+				for(y = 0; y < 25; y++) {
+					let cell = linha.insertCell();
+					let text = document.createTextNode(cedula++);
+					cell.appendChild(text);
+				}
+			}
 		}
 
 	</script>
