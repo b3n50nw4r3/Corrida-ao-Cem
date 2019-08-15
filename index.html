@@ -30,7 +30,7 @@
 
 		<!-- Input do número máximo de movimentos da partida -->
 		<p class="lead">Insira o número de movimentos máximo da partida.</p>
-		<!--                      id para usar no JS | nº padrão | limitar tamanho por 2 digitos e atualizar variavel automaticamente-->
+		                      <!-- id para usar no JS | limitar tamanho por 2 digitos e atualizar variavel automaticamente-->
 		<input class="form-control" id="movimentos_max" oninput="checarTamanhoInput(2); atualizarMovimentosMax()" maxLength="2" min="0" max="99" type="number" placeholder="5"/>
 
 		<!-- Linha divisória -->
@@ -40,23 +40,23 @@
 		<h4>Primeira casa na qual você tem que parar:</h4>
         <h6 id="primeira">nº da casa</h6>
         
-        <br>
-        
         <!-- Resultado do cálculo -->
 		<h4>Cada casa na qual você tem que parar:</h4>
 		<h6 id="cada">nº da casa</h6>
 
+		<!-- Linha divisória -->
+		<hr class="my-4">
+
+		<!-- Tabela de movimentos criada por JS -->
+		<table id="tabela-do-jogo" class="table table-responsive table-dark"></table>
 	</div>
 
 	<!-- Código vai aqui -->
     <script type="text/javascript">
-
 		//Input do usuário
 		let movimentoxMaxInput = document.getElementById("movimentos_max");
 		//Valor final usado no código
 		let movimentosMax = 5;
-		//Lista
-		let listaDeCasas = [];
 
         definirPrimeiraCasa();
         definirCadaCasa();
@@ -75,24 +75,43 @@
             definirCadaCasa();
 		}
 
+		//Cálculo do primeiro movimento do jogo
         function definirPrimeiraCasa() {
             let definirPrimeiraCasa = 100 % (parseInt(movimentosMax) + 1);
             console.log("primeira casa: " + definirPrimeiraCasa);
             document.getElementById("primeira").innerText = definirPrimeiraCasa;
         }
 
-        function definirCadaCasa() {
-			//limpar lista
-			listaDeCasas = []; 
+		gerarTabela();
+		function gerarTabela() {
+			let tabela = document.getElementById("tabela-do-jogo");
+			cedula = 1;
+			for(i = 0; i < 4; i++) {
+				let linha = tabela.insertRow();
+				for(y = 0; y < 25; y++) {
+					let cell = linha.insertCell();
+					let text = document.createTextNode(cedula++);
+					cell.appendChild(text);
+				}
+			}
+		}
 
-            let casaAtual = document.getElementById("primeira").innerText;
-			casaAtual = parseInt(casaAtual);
-			console.log("casa atual: " + casaAtual);
+		//Cálculo de todas as casas esperadas para o jogo
+        function definirCadaCasa() {
+			//Lista de todas as casas que você terá de passar no jogo
+			let listaDeCasas = []; 
+			//Começar o cálculo na primeira casa sugerida
+            let casaAtual = parseInt(document.getElementById("primeira").innerText);
+			console.log("Casa atual: " + casaAtual);
+			//Adicionar a primeira casa a lista de casa
             listaDeCasas.push(casaAtual);
+			//Até chega na última casa
             while(casaAtual < 100) {
+				//O próximo movimento
                 let proximaCasa = casaAtual + (parseInt(movimentosMax) + 1);
 				console.log("proxima casa: " + proximaCasa);
                 listaDeCasas.push(proximaCasa);
+				//Movimento feito
 				casaAtual = proximaCasa;
             }
             console.log("lista atual: " + listaDeCasas);
