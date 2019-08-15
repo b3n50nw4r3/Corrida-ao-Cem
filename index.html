@@ -38,12 +38,15 @@
 
 		<!-- Resultado do cálculo -->
 		<h4>Primeira casa na qual você tem que parar:</h4>
-		<h6 id="">nº da casa</h6>
+		<h6 id="primeira">nº da casa</h6>
 
 	</div>
 
 	<!-- Código vai aqui -->
-	<script type="text/javascript">
+    <script type="text/javascript">
+    
+        let primeiraCasa = ducument.getElementById("primeira")
+
 		//Input do usuário
 		let movimentoxMaxInput = document.getElementById("movimentos_max");
 		//Valor final usado no código
@@ -58,8 +61,15 @@
 		function atualizarMovimentosMax() {
 			//movimentoxMax = número digitado (já limitado a 99 pela função checarTamanhoInput)
 			movimentosMax = movimentoxMaxInput.value;
-			console.log("Movimentos máximos: " + movimentosMax)
+			console.log("Movimentos máximos: " + movimentosMax);
+            definirPrimeiraCasa();
 		}
+
+        function definirPrimeiraCasa (){
+            primeiraCasa = 100 % (movimentosMax + 1);
+            alert(primeiraCasa);
+        }
+
 	</script>
 
 </body>
