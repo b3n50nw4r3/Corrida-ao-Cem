@@ -40,8 +40,10 @@
 		<h4>Primeira casa na qual você tem que parar:</h4>
         <h6 id="primeira">nº da casa</h6>
         
+        <br>
+        
         <!-- Resultado do cálculo -->
-		<h4>Primeira casa na qual você tem que parar:</h4>
+		<h4>Cada casa na qual você tem que parar:</h4>
 		<h6 id="cada">nº da casa</h6>
 
 	</div>
@@ -53,8 +55,11 @@
 		let movimentoxMaxInput = document.getElementById("movimentos_max");
 		//Valor final usado no código
 		let movimentosMax = 5;
+		//Lista
+		let listaDeCasas = [];
 
         definirPrimeiraCasa();
+        definirCadaCasa();
 
 		//Limitar tamanho do input para 2 dígitos (99) para que não seja possível bugar o programa
 		function checarTamanhoInput(maxLength) {
@@ -67,15 +72,32 @@
 			movimentosMax = movimentoxMaxInput.value;
 			console.log("Movimentos máximos: " + movimentosMax);
             definirPrimeiraCasa();
+            definirCadaCasa();
 		}
 
-        function definirPrimeiraCasa (){
+        function definirPrimeiraCasa() {
             let definirPrimeiraCasa = 100 % (parseInt(movimentosMax) + 1);
-            console.log(definirPrimeiraCasa);
+            console.log("primeira casa: " + definirPrimeiraCasa);
             document.getElementById("primeira").innerText = definirPrimeiraCasa;
         }
 
+        function definirCadaCasa() {
+			//limpar lista
+			listaDeCasas = []; 
 
+            let casaAtual = document.getElementById("primeira").innerText;
+			casaAtual = parseInt(casaAtual);
+			console.log("casa atual: " + casaAtual);
+            listaDeCasas.push(casaAtual);
+            while(casaAtual < 100) {
+                let proximaCasa = casaAtual + (parseInt(movimentosMax) + 1);
+				console.log("proxima casa: " + proximaCasa);
+                listaDeCasas.push(proximaCasa);
+				casaAtual = proximaCasa;
+            }
+            console.log("lista atual: " + listaDeCasas);
+            document.getElementById("cada").innerText = listaDeCasas;
+		}
 
 	</script>
 
