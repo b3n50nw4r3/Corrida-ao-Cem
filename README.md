@@ -4,4 +4,4 @@
 
 https://corrida-ao-cem.eduardomoraes84.now.sh
 
-https://b3n50nw4r3.github.io/Corrida-ao-Cem/
+https://github.com/b3n50nw4r3/Corrida-ao-Cem
